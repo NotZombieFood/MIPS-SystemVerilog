@@ -1,23 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    00:02:43 05/10/2017 
-// Design Name: 
-// Module Name:    MIPS 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
+
 module MIPS(
     input clk,
 	 input rst,
@@ -26,36 +8,36 @@ module MIPS(
 	 output [31:0] leer_dato
     );
 	 
-	 wire [31:0] Word; //salida del pc
-	 wire [31:0] Word_4;  //salida adder+4
-	 wire [31:0] Address_branch; //salida Adder Branch
-	 wire [31:0] Address_final;  //Salida mux branch
-	 wire [25:0] Address_jump;  //Direccion a saltar con adress
-	 wire [31:0] Address_jump_final;  //Direccion final del jump
-	 wire RegDst;  //Salidas del control
-	 wire Branch;
-	 wire MemRead;
-	 wire MemtoReg;
-	 wire [1:0] Alu_op;
-	 wire AluSrc;
-	 wire RegWrite;
-	 wire [4:0] Address1;
-	 wire [4:0] Address2;
-	 wire[4:0] Address3;
-	 wire [15:0] extender;
-	 wire J; //Salida si es tipo J
-	 wire [31:0] ReadData1;  //Salida banco de registros
-	 wire [31:0] ReadData2;  //Salida banco de registros
-	 wire [4:0] Mux_Address3; //Mux antes del banco de registros
-	 wire [31:0] Extend_32;  //Salida extender 32 bits
-	 wire [31:0] Shifter_32;  //Salida del shifter
-	 wire [31:0] Mux_Alu;  // Salida de mux antes del alu
-	 wire zero; //Salida zero del Alu
-	 wire [31:0] result; //Resultado del Alu
-	 wire And; //Salida del And
-	 wire [31:0] Data_DataMemory;  //Salida del DataMemory
-	 wire [31:0] WriteData;  //Datos que se escriben en el banco de registros
-	 reg [31:0] Address;  //Entrada pc
+	 logic [31:0] Word; //salida del pc
+	 logic [31:0] Word_4;  //salida adder+4
+	 logic [31:0] Address_branch; //salida Adder Branch
+	 logic [31:0] Address_final;  //Salida mux branch
+	 logic [25:0] Address_jump;  //Direccion a saltar con adress
+	 logic [31:0] Address_jump_final;  //Direccion final del jump
+	 logic RegDst;  //Salidas del control
+	 logic Branch;
+	 logic MemRead;
+	 logic MemtoReg;
+	 logic [1:0] Alu_op;
+	 logic AluSrc;
+	 logic RegWrite;
+	 logic [4:0] Address1;
+	 logic [4:0] Address2;
+	 logic[4:0] Address3;
+	 logic [15:0] extender;
+	 logic J; //Salida si es tipo J
+	 logic [31:0] ReadData1;  //Salida banco de registros
+	 logic [31:0] ReadData2;  //Salida banco de registros
+	 logic [4:0] Mux_Address3; //Mux antes del banco de registros
+	 logic [31:0] Extend_32;  //Salida extender 32 bits
+	 logic [31:0] Shifter_32;  //Salida del shifter
+	 logic [31:0] Mux_Alu;  // Salida de mux antes del alu
+	 logic zero; //Salida zero del Alu
+	 logic [31:0] result; //Resultado del Alu
+	 logic And; //Salida del And
+	 logic [31:0] Data_DataMemory;  //Salida del DataMemory
+	 logic [31:0] WriteData;  //Datos que se escriben en el banco de registros
+	 logic	[31:0] Address;  //Entrada pc
 	 
 	 
 	 InstructionMemory InstructionMemory(
@@ -131,7 +113,7 @@ module MIPS(
 	 assign Address_final = (And) ? Address_branch:Word_4;              //Parte de arriba
 	 
 	 //Program Counter
-	 always @(posedge clk) begin
+	 always_ff @(posedge clk) begin
 		if (rst == 1 ) Address <= 0;
 		else Address <= (J) ? Address_jump_final:Address_final; 
 	 end

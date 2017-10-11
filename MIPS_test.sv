@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   15:33:39 05/10/2017
+// Create Date:   02:04:04 05/10/2017
 // Design Name:   MIPS
-// Module Name:   D:/Verilog/MIPS/Mips_testfinal.v
+// Module Name:   D:/Verilog/MIPS/MIPS_test.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
@@ -22,44 +22,35 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module Mips_testfinal;
+module MIPS_test;
 
 	// Inputs
-	reg clk;
-	reg rst;
+	logic clk;
 
 	// Outputs
-	wire [31:0] direccion;
-	wire [31:0] palabra;
-	wire [31:0] leer_dato;
+	logic [31:0] direccion;
 
 	// Instantiate the Unit Under Test (UUT)
 	MIPS uut (
-		.clk(clk),
-		.rst(rst),
-		.direccion(direccion), 
-		.palabra(palabra), 
-		.leer_dato(leer_dato)
+		.clk(clk), 
+		.direccion(direccion)
 	);
 
 	initial begin
 		// Initialize Inputs
 		clk = 0;
-		rst = 1;
-		
-		#20;
-		rst = 0;
 
 		// Wait 100 ns for global reset to finish
-		#150;
+		#100;
         
 		// Add stimulus here
+		
 
 	end
 	
 	initial begin
-		forever #10 clk = ~clk;
-		end
+	forever #10 clk = ~clk;
+	end
       
 endmodule
 

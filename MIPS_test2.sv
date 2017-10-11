@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   23:54:00 05/09/2017
-// Design Name:   Shifter_2
-// Module Name:   D:/Verilog/MIPS/shifter_test.v
+// Create Date:   02:03:37 05/10/2017
+// Design Name:   MIPS
+// Module Name:   D:/Verilog/MIPS/MIPS_test2.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: Shifter_2
+// Verilog Test Fixture created by ISE for module: MIPS
 //
 // Dependencies:
 // 
@@ -22,37 +22,28 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module shifter_test;
+module MIPS_test2;
 
 	// Inputs
-	reg [31:0] Input;
+	logic clk;
 
 	// Outputs
-	wire [31:0] Output;
+	logic [31:0] direccion;
 
 	// Instantiate the Unit Under Test (UUT)
-	Shifter_2 uut (
-		.Input(Input), 
-		.Output(Output)
+	MIPS uut (
+		.clk(clk), 
+		.direccion(direccion)
 	);
 
 	initial begin
 		// Initialize Inputs
-		Input = 0;
+		clk = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
         
 		// Add stimulus here
-		
-		Input = 0;
-		#100;
-		
-		Input = 65;
-		#100;
-		
-		Input = 234;
-		#100;
 
 	end
       

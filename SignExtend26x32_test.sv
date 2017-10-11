@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   02:20:24 05/09/2017
-// Design Name:   Alu_ctrl
-// Module Name:   D:/Verilog/MIPS/ALu_ctrl_test.v
+// Create Date:   23:46:13 05/09/2017
+// Design Name:   SignExtend_26X32
+// Module Name:   D:/Verilog/MIPS/SignExtend26x32_test.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: Alu_ctrl
+// Verilog Test Fixture created by ISE for module: SignExtend_26X32
 //
 // Dependencies:
 // 
@@ -22,61 +22,41 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module ALu_ctrl_test;
+module SignExtend26x32_test;
 
 	// Inputs
-	reg [6:0] funct;
-	reg [1:0] Alu_op;
+	logic [25:0] Input_26;
 
 	// Outputs
-	wire [3:0] ctrl;
+	logic [31:0] Output_32;
 
 	// Instantiate the Unit Under Test (UUT)
-	Alu_ctrl uut (
-		.funct(funct), 
-		.Alu_op(Alu_op), 
-		.ctrl(ctrl)
+	SignExtend_26X32 uut (
+		.Input_26(Input_26), 
+		.Output_32(Output_32)
 	);
 
 	initial begin
 		// Initialize Inputs
-		funct = 0;
-		Alu_op = 0;
+		Input_26 = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
         
 		// Add stimulus here
 		
-		funct = 6'b100100;
-		Alu_op = 0;
+		Input_26 = 2;
 		#100;
 		
-		funct = 0;
-		Alu_op = 01;
+		Input_26 = 6;
 		#100;
 		
-		funct = 6'b100000;
-		Alu_op = 2;
+		Input_26 = -2;
 		#100;
 		
-		funct = 6'b100010;
-		Alu_op = 2;
+		Input_26 = 0;
 		#100;
-		
-		funct = 6'b100100;
-		Alu_op = 2;
-		#100;
-		
-		funct = 6'b100101;
-		Alu_op = 2;
-		#100;
-		
-		funct = 6'b101010;
-		Alu_op = 2;
-		#100;
-		
-		
+
 	end
       
 endmodule

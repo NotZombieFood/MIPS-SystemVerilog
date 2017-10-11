@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   14:50:58 05/10/2017
-// Design Name:   PC
-// Module Name:   D:/Verilog/MIPS/Pc_test.v
+// Create Date:   02:20:24 05/09/2017
+// Design Name:   Alu_ctrl
+// Module Name:   D:/Verilog/MIPS/ALu_ctrl_test.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: PC
+// Verilog Test Fixture created by ISE for module: Alu_ctrl
 //
 // Dependencies:
 // 
@@ -22,47 +22,61 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module Pc_test;
+module ALu_ctrl_test;
 
 	// Inputs
-	reg [31:0] Adress;
+	logic [6:0] funct;
+	logic [1:0] Alu_op;
 
 	// Outputs
-	wire [31:0] Word;
+	logic [3:0] ctrl;
 
 	// Instantiate the Unit Under Test (UUT)
-	PC uut (
-		.Adress(Adress), 
-		.Word(Word)
+	Alu_ctrl uut (
+		.funct(funct), 
+		.Alu_op(Alu_op), 
+		.ctrl(ctrl)
 	);
 
 	initial begin
 		// Initialize Inputs
-		Adress = 0;
+		funct = 0;
+		Alu_op = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
         
 		// Add stimulus here
 		
-		Adress = 0;
+		funct = 6'b100100;
+		Alu_op = 0;
 		#100;
 		
-		Adress = 4;
+		funct = 0;
+		Alu_op = 01;
 		#100;
 		
-		Adress = 8;
+		funct = 6'b100000;
+		Alu_op = 2;
 		#100;
 		
-		Adress = 12;
+		funct = 6'b100010;
+		Alu_op = 2;
 		#100;
 		
-		Adress = 63;
+		funct = 6'b100100;
+		Alu_op = 2;
 		#100;
 		
-		Adress = 128;
+		funct = 6'b100101;
+		Alu_op = 2;
 		#100;
-
+		
+		funct = 6'b101010;
+		Alu_op = 2;
+		#100;
+		
+		
 	end
       
 endmodule

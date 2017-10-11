@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   18:11:35 05/09/2017
-// Design Name:   Control
-// Module Name:   D:/Verilog/MIPS/Control_test.v
+// Create Date:   14:50:58 05/10/2017
+// Design Name:   PC
+// Module Name:   D:/Verilog/MIPS/Pc_test.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: Control
+// Verilog Test Fixture created by ISE for module: PC
 //
 // Dependencies:
 // 
@@ -22,63 +22,47 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module Control_test;
+module Pc_test;
 
 	// Inputs
-	reg [31:26] c;
+	logic [31:0] Adress;
 
 	// Outputs
-	wire RegDst;
-	wire Branch;
-	wire MemRead;
-	wire MemtoReg;
-	wire [1:0] Alu_op;
-	wire MemWrite;
-	wire AluSrc;
-	wire RegWrite;
-	wire J;
+	logic [31:0] Word;
 
 	// Instantiate the Unit Under Test (UUT)
-	Control uut (
-		.c(c), 
-		.RegDst(RegDst), 
-		.Branch(Branch), 
-		.MemRead(MemRead), 
-		.MemtoReg(MemtoReg), 
-		.Alu_op(Alu_op), 
-		.MemWrite(MemWrite), 
-		.AluSrc(AluSrc), 
-		.RegWrite(RegWrite), 
-		.J(J)
+	PC uut (
+		.Adress(Adress), 
+		.Word(Word)
 	);
 
 	initial begin
 		// Initialize Inputs
-		c = 0;
+		Adress = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
         
 		// Add stimulus here
 		
-		c = 6'b100011;
+		Adress = 0;
 		#100;
 		
-		c = 6'b101011;
+		Adress = 4;
 		#100;
 		
-		c = 6'b000100;
+		Adress = 8;
 		#100;
 		
-		c = 6'b000000;
+		Adress = 12;
 		#100;
 		
-		c = 6'b001001;
+		Adress = 63;
 		#100;
 		
-		c = 6'b000010;
+		Adress = 128;
 		#100;
-		
+
 	end
       
 endmodule

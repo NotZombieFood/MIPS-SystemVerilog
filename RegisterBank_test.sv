@@ -25,16 +25,16 @@
 module RegisterBank_test;
 
 	// Inputs
-	reg RegWrite;
-	reg [5:0] ReadRegister1;
-	reg [5:0] ReadRegister2;
-	reg [5:0] WriteRegister;
-	reg clk;
-	reg [31:0] WriteData;
+	logic RegWrite;
+	logic [5:0] ReadRegister1;
+	logic [5:0] ReadRegister2;
+	logic [5:0] WriteRegister;
+	logic clk;
+	logic [31:0] WriteData;
 
 	// Outputs
-	wire [31:0] ReadData1;
-	wire [31:0] ReadData2;
+	logic [31:0] ReadData1;
+	logic [31:0] ReadData2;
 
 	// Instantiate the Unit Under Test (UUT)
 	RegisterBank uut (

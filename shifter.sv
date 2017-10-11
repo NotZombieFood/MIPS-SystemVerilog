@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   23:41:44 05/09/2017
-// Design Name:   SignExtend_16X32
-// Module Name:   D:/Verilog/MIPS/Sign16x32_test.v
+// Create Date:   23:52:36 05/09/2017
+// Design Name:   Shifter_2
+// Module Name:   D:/Verilog/MIPS/shifter.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: SignExtend_16X32
+// Verilog Test Fixture created by ISE for module: Shifter_2
 //
 // Dependencies:
 // 
@@ -22,37 +22,27 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module Sign16x32_test;
+module shifter;
 
 	// Inputs
-	reg [15:0] Input_16;
-
-	// Outputs
-	wire [31:0] Output_32;
+	logic [31:0] Input;
+	logic [31:0] Output;
 
 	// Instantiate the Unit Under Test (UUT)
-	SignExtend_16X32 uut (
-		.Input_16(Input_16), 
-		.Output_32(Output_32)
+	Shifter_2 uut (
+		.Input(Input), 
+		.Output(Output)
 	);
 
 	initial begin
 		// Initialize Inputs
-		Input_16 = 0;
+		Input = 0;
+		Output = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
         
 		// Add stimulus here
-		
-		Input_16 = 0;
-		#100;
-		
-		Input_16 = 5;
-		#100;
-		
-		Input_16 = -7;
-		#100;
 
 	end
       

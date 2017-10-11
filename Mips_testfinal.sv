@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   23:46:13 05/09/2017
-// Design Name:   SignExtend_26X32
-// Module Name:   D:/Verilog/MIPS/SignExtend26x32_test.v
+// Create Date:   15:33:39 05/10/2017
+// Design Name:   MIPS
+// Module Name:   D:/Verilog/MIPS/Mips_testfinal.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: SignExtend_26X32
+// Verilog Test Fixture created by ISE for module: MIPS
 //
 // Dependencies:
 // 
@@ -22,42 +22,44 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module SignExtend26x32_test;
+module Mips_testfinal;
 
 	// Inputs
-	reg [25:0] Input_26;
+	logic clk;
+	logic rst;
 
 	// Outputs
-	wire [31:0] Output_32;
+	logic [31:0] direccion;
+	logic [31:0] palabra;
+	logic [31:0] leer_dato;
 
 	// Instantiate the Unit Under Test (UUT)
-	SignExtend_26X32 uut (
-		.Input_26(Input_26), 
-		.Output_32(Output_32)
+	MIPS uut (
+		.clk(clk),
+		.rst(rst),
+		.direccion(direccion), 
+		.palabra(palabra), 
+		.leer_dato(leer_dato)
 	);
 
 	initial begin
 		// Initialize Inputs
-		Input_26 = 0;
+		clk = 0;
+		rst = 1;
+		
+		#20;
+		rst = 0;
 
 		// Wait 100 ns for global reset to finish
-		#100;
+		#150;
         
 		// Add stimulus here
-		
-		Input_26 = 2;
-		#100;
-		
-		Input_26 = 6;
-		#100;
-		
-		Input_26 = -2;
-		#100;
-		
-		Input_26 = 0;
-		#100;
 
 	end
+	
+	initial begin
+		forever #10 clk = ~clk;
+		end
       
 endmodule
 

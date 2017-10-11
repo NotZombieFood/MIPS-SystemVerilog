@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   02:04:04 05/10/2017
-// Design Name:   MIPS
-// Module Name:   D:/Verilog/MIPS/MIPS_test.v
+// Create Date:   23:41:44 05/09/2017
+// Design Name:   SignExtend_16X32
+// Module Name:   D:/Verilog/MIPS/Sign16x32_test.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: MIPS
+// Verilog Test Fixture created by ISE for module: SignExtend_16X32
 //
 // Dependencies:
 // 
@@ -22,34 +22,38 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module MIPS_test;
+module Sign16x32_test;
 
 	// Inputs
-	reg clk;
+	logic [15:0] Input_16;
 
 	// Outputs
-	wire [31:0] direccion;
+	logic [31:0] Output_32;
 
 	// Instantiate the Unit Under Test (UUT)
-	MIPS uut (
-		.clk(clk), 
-		.direccion(direccion)
+	SignExtend_16X32 uut (
+		.Input_16(Input_16), 
+		.Output_32(Output_32)
 	);
 
 	initial begin
 		// Initialize Inputs
-		clk = 0;
+		Input_16 = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
         
 		// Add stimulus here
 		
+		Input_16 = 0;
+		#100;
+		
+		Input_16 = 5;
+		#100;
+		
+		Input_16 = -7;
+		#100;
 
-	end
-	
-	initial begin
-	forever #10 clk = ~clk;
 	end
       
 endmodule

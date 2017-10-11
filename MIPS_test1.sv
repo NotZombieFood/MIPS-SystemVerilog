@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   02:03:37 05/10/2017
+// Create Date:   00:56:58 05/10/2017
 // Design Name:   MIPS
-// Module Name:   D:/Verilog/MIPS/MIPS_test2.v
+// Module Name:   D:/Verilog/MIPS/MIPS_test1.v
 // Project Name:  MIPS
 // Target Device:  
 // Tool versions:  
@@ -22,18 +22,18 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module MIPS_test2;
+module MIPS_test1;
 
 	// Inputs
-	reg clk;
+	logic clk;
 
 	// Outputs
-	wire [31:0] direccion;
+	logic [31:0] pr;
 
 	// Instantiate the Unit Under Test (UUT)
 	MIPS uut (
 		.clk(clk), 
-		.direccion(direccion)
+		.pr(pr)
 	);
 
 	initial begin

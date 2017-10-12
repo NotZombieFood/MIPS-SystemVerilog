@@ -5,8 +5,8 @@ module Alu_final(
     input [31:0] b,
     input [1:0] Alu_op,
     input [5:0] funct,
-    output zero,
-    output [31:0] result
+    logic zero,
+    logic [31:0] result
     );
 	 
 	 logic [5:0] control;

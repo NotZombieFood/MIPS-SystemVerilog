@@ -9,8 +9,7 @@ module DataMemory(
     output logic [31:0] ReadData
     );
 
-always_ff @ (posedge clk) begin
-	 
-
+always_comb begin
+	ReadData= 32'b00000000000000000000000000000000;
 end
 endmodule

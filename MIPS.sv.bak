@@ -3,9 +3,9 @@
 module MIPS(
     input clk,
 	 input rst,
-	 output [31:0] resultCopy,
-	 output [31:0] readData2Copy,
-	 output MemWrite
+	 output [31:0] direccion,
+	 output [31:0] palabra,
+	 output [31:0] leer_dato
     );
 	 
 	 logic [31:0] Word; //salida del pc
@@ -38,6 +38,7 @@ module MIPS(
 	 logic [31:0] Data_DataMemory;  //Salida del DataMemory
 	 logic [31:0] WriteData;  //Datos que se escriben en el banco de registros
 	 logic	[31:0] Address;  //Entrada pc
+	 
 	 
 	 InstructionMemory InstructionMemory(
 	 .Address(Address),
@@ -98,8 +99,15 @@ module MIPS(
 	 .result(result)
 	 );
 	 
-	 assign resultCopy = result;
-	 assign readData2Copy = ReadData2;
+	 DataMemory DataMemory(
+	 .Address(result),
+	 .WriteData(ReadData2),
+	 .MemWrite(MemWrite),
+	 .MemRead(MemRead),
+	 .clk(clk),
+	 .ReadData(Data_DataMemory)
+	 );
+	 
 	 assign Word_4 = Address + 4;
 	 assign Address_branch = Word_4 + Shifter_32; 
 	 assign Address_final = (And) ? Address_branch:Word_4;              //Parte de arriba
@@ -114,10 +122,15 @@ module MIPS(
 	 assign Mux_Address3 = (RegDst) ? Address3:Address2;
 	 
 	 assign Mux_Alu = (AluSrc) ? Extend_32:ReadData2;
-	 	 
+	 
+	 assign direccion = Address;
+	 
 	 assign And = (Branch & zero);
 	 
 	 assign WriteData = (MemtoReg) ? Data_DataMemory:result;
 	 
-	 	 
+	 assign palabra = Word;
+	 
+	 assign leer_dato = WriteData;
+	 
 endmodule

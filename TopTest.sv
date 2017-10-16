@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module TopTest;
 // Inputs
 	logic clk;
@@ -11,10 +12,10 @@ module TopTest;
 	initial begin
 		// Initialize Inputs
 		clk = 0;
-		rst = 1;
+		rst = 0;
 		// Wait 100 ns for global reset to finish
 		#100;
-       rst= 0;
+       rst= 1;
 		// Add stimulus here
 		
 

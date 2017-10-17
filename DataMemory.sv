@@ -1,17 +1,36 @@
 `timescale 1ns / 1ps
-
-module DataMemory 
-#(
-  parameter NUM_REGS = 16, 
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    19:16:28 05/09/2017 
+// Design Name: 
+// Module Name:    DataMemory 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module DataMemory
+	#(
+  parameter NUM_REGS = 256, 
   parameter SIZE = 32
 )(
   input clk,
   input rst,
-  input  [3:0]  wr_addr,
-  input         wr_en,
-  input  [31:0] wr_data,
-  input  [3:0]  rd_addr,
-  output [31:0] rd_data
+  input  [31:0]  Address,
+  input         MemWrite,
+  input MemRead,
+  input  [31:0] WriteData,
+  output logic [31:0] ReadData
+
 );
   
     logic [SIZE-1:0] rf [NUM_REGS-1:0];
@@ -21,10 +40,18 @@ module DataMemory
       if (rst)
 			for (i = 0; i < NUM_REGS-1; i = i + 1)
 				rf[i] <= 0;
-		else if (wr_en) 
-        rf[wr_addr] <= wr_data;
+		else  if (MemWrite)
+        rf[Address] <= WriteData;
+		
 	end
-
-    assign rd_data = rf[rd_addr];
+	
+	always_comb begin
+		if (MemRead)
+		 ReadData = rf[Address];
+		else ReadData = 0;
+	 end
 
 endmodule
+	
+	 
+

@@ -1,11 +1,32 @@
 `timescale 1ns / 1ps
-
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    00:02:43 05/10/2017 
+// Design Name: 
+// Module Name:    MIPS 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
 module MIPS(
     input clk,
 	 input rst,
-	 output [31:0] resultCopy,
-	 output [31:0] readData2Copy,
-	 output MemWrite
+	 output [31:0] direccion,
+	 output [31:0] palabra,
+	 output [31:0] leer_dato,
+	 output wr_en,
+	 output [31:0] wr_addr,
+	 output [31:0] wr_data
     );
 	 
 	 logic [31:0] Word; //salida del pc
@@ -37,7 +58,13 @@ module MIPS(
 	 logic And; //Salida del And
 	 logic [31:0] Data_DataMemory;  //Salida del DataMemory
 	 logic [31:0] WriteData;  //Datos que se escriben en el banco de registros
-	 logic	[31:0] Address;  //Entrada pc
+	 logic [31:0] Address;  //Entrada pc
+	 
+	 //Salidas extra
+	 assign wr_en = RegWrite;
+	 assign wr_addr= Mux_Address3;
+	 assign wr_data = WriteData;
+	 
 	 
 	 InstructionMemory InstructionMemory(
 	 .Address(Address),
@@ -98,14 +125,21 @@ module MIPS(
 	 .result(result)
 	 );
 	 
-	 assign resultCopy = result;
-	 assign readData2Copy = ReadData2;
+	 DataMemory DataMemory(
+	 .Address(result),
+	 .WriteData(ReadData2),
+	 .MemWrite(MemWrite),
+	 .MemRead(MemRead),
+	 .clk(clk),
+	 .ReadData(Data_DataMemory)
+	 );
+	 
 	 assign Word_4 = Address + 4;
 	 assign Address_branch = Word_4 + Shifter_32; 
 	 assign Address_final = (And) ? Address_branch:Word_4;              //Parte de arriba
 	 
 	 //Program Counter
-	 always_ff @(posedge clk) begin
+	 always @(posedge clk) begin
 		if (rst == 1 ) Address <= 0;
 		else Address <= (J) ? Address_jump_final:Address_final; 
 	 end
@@ -114,10 +148,15 @@ module MIPS(
 	 assign Mux_Address3 = (RegDst) ? Address3:Address2;
 	 
 	 assign Mux_Alu = (AluSrc) ? Extend_32:ReadData2;
-	 	 
+	 
+	 assign direccion = Address;
+	 
 	 assign And = (Branch & zero);
 	 
 	 assign WriteData = (MemtoReg) ? Data_DataMemory:result;
 	 
-	 	 
+	 assign palabra = Word;
+	 
+	 assign leer_dato = WriteData;
+	 
 endmodule

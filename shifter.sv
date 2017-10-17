@@ -25,8 +25,8 @@
 module shifter;
 
 	// Inputs
-	logic [31:0] Input;
-	logic [31:0] Output;
+	reg [31:0] Input;
+	reg [31:0] Output;
 
 	// Instantiate the Unit Under Test (UUT)
 	Shifter_2 uut (

@@ -1,112 +1,93 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    22:03:20 05/09/2017 
+// Design Name: 
+// Module Name:    PC 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module InstructionMemory(
+    input [31:0] Address,
+    output logic [31:0] Word
+    );
+	
+	/*
+	 ROM_1 r1(
+	 .a(Address[5:0]),
+	 .spo(Word)
+	 );
+	 */
+	 
+	 
+	 always_comb begin
+	case (Address[7:0])       //   //   //  //  //  //
+			0: Word = 32'b00100100000000000000000100100000; 	//Guardar espacio   0-espacio
+			4: Word = 32'b00100100001000010000000100100000;	//Instruction 4        1-espacio
+			8: Word = 32'b00100100010000100000000100100000;	//Instruction 8        2-espacio
+			12: Word = 32'b00100100011000110000000100100000; 	//Instruction 12    3-espacio
+			16: Word = 32'b00100100100001000000000101001000; 	//Instruction 16    4-h
+			20: Word = 32'b00100100101001010000000101000101; 	//Instruction 20    5-e
+			24: Word = 32'b00100100110001100000000101001100; 	//Instruction 24    6-l
+			28: Word = 32'b00100100111001110000000101001100; 	//Instruction 28    7-l
+			32: Word = 32'b00100101000010000000000101001111; 	//Instruction 32    8-o
+			36: Word = 32'b00100101001010010000000100100000; 	//Instruction 36    9-espacio
+			40: Word = 32'b00100101010010100000000100100000; 	//Instruction 40    10-espacio
+			44: Word = 32'b00100101011010110000000100100000; 	//Instruction 44    11-espacio
+			48: Word = 32'b00100101100011000000000100100000; 	//Instruction 48    12-espacio
+			52: Word = 32'b00100101101011010000000100100000; 	//Instruction 52    13-espacio
+			56: Word = 32'b00100101110011100000000100100000; 	//Instruction 56    14-espacio
+			60: Word = 32'b00100101111011110000000011000000; 	//Instruction 60    15-Salto de linea
+			64: Word = 32'b00100110000100000000000100100000; 	//Instruction 64    16-espacio
+			68: Word = 32'b00100110001100010000000100100000; 	//Instruction 68    17-espacio
+			72: Word = 32'b00100110010100100000000100100000; 	//Instruction 72    18-espacio
+			76: Word = 32'b00100110011100110000000100100000; 	//Instruction 76    19-espacio
+			80: Word = 32'b00100110100101000000000101010111; 	//Instruction 80    20-w
+			84: Word = 32'b00100110101101010000000101001111; 	//Instruction 84    21-o
+			88: Word = 32'b00100110110101100000000101010010; 	//Instruction 88    22-r
+			92: Word = 32'b00100110111101110000000101001100; 	//Instruction 92    23-l
+			96: Word = 32'b00100111000110000000000101000100; 	//Instruction 96    24-d
+			100: Word = 32'b00100111001110010000000100100000; 	//Instruction 100   25-espacio
+			104: Word = 32'b00100111010110100000000100100000; 	//Instruction 104   26-espacio
+			108: Word = 32'b00100111011110110000000100100000; 	//Instruction 108   27-espacio
+			112: Word = 32'b00100111100111000000000100100000; 	//Instruction 112   28-espacio
+			116: Word = 32'b00100111101111010000000100100000; 	//Instruction 116   29-espacio
+			120: Word = 32'b00100111110111100000000100100000; 	//Instruction 120   30-espacio
+			124: Word = 32'b00100111111111110000000100100000; 	//Instruction 124   31-espacio
+			128: Word = 32'b00001000000000000000000010000000; 	//Instruction 128   loop infinito
+			132: Word = 32'b0010; 	//Instruction 132
+			136: Word = 32'b0010; 	//Instruction 136
+			144: Word = 32'b0010; 	//Instruction 140
+			144: Word = 32'b0010; 	//Instruction 144
+			148: Word = 32'b0010; 	//Instruction 148
+			152: Word = 32'b0010; 	//Instruction 152
+			156: Word = 32'b0010; 	//Instruction 156
+			default: Word = 32'b11111111111111111111111111111111;
+	endcase 
+end
+	 
+	 
+	 
+	 
+	/*
+	 ROM_3 r1(
+	 .a(Address[5:0]),
+	 .spo(Word)
+	 );
+	 */
+	 
+	 
 
- module InstructionMemory ( 
- 
-         input   [31:0]   Address , 
- 
-         output  logic   [31:0] Word 
- 
-         ); 
-  	 
- 
- always_comb  begin 
- 
- 	 case  (Address[7:0]) 
- 
- 	 	 	 0:Word =32'b001001000000000100000000101001000;   	 // I n s t r u c t i o n   0 * 
- 
- 	 	 	 4:Word =32'b001001000000001000000000101000101; 	 	 // I n s t r u c t i o n   4 * 
- 
- 	 	 	 8:Word =32'b001001000000001100000000101110110; 	 	// I n s t r u c t i o n   8 
- 
- 	 	 	 12:Word =32'b00100100000001000000000101110110;   	// I n s t r u c t i o n   1 2 
- 
- 	 	 	 16:Word =32'b00100100000000100000000101001111;   	// I n s t r u c t i o n   1 6 * 
- 
- 	 	 	 20:Word =32'b00100100000000100000000100100000;  	// I n s t r u c t i o n   2 0 * 
- 
- 	 	 	 24:Word =32'b00100100000000100000000101010111; 	 // I n s t r u c t i o n   2 4 
- 
- 	 	 	 28:Word =32'b00100100000000100000000101001111; 	 // I n s t r u c t i o n   2 8 
- 
- 	 	 	 32:Word =32'b00100100000000100000000101010010; 	 // I n s t r u c t i o n   3 2 
- 
- 	 	 	 36:Word =32'b00100100000001000000000101110110; 	 // I n s t r u c t i o n   3 6 
- 
- 	 	 	 40:Word =32'b00100100000001000000000101000100;   // I n s t r u c t i o n   4 0 
- 
- 	 	 	 44:Word =32'b10101100000000010000000000000001; 	 // I n s t r u c t i o n   4 4 * 
- 
- 	 	 	 48:Word =32'b10101100000000100000000000000010; 	 // I n s t r u c t i o n   4 8 * 
- 
- 	 	 	 52:Word =32'b10101100000000110000000000000011; 	 // I n s t r u c t i o n   5 2 * 
- 
- 	 	 	 56:Word =32'b10101100000001000000000000000100; 	 // I n s t r u c t i o n   5 6 * 
- 
- 	 	 	 60:Word =32'b10101100000001010000000000000101; 	 // I n s t r u c t i o n   6 0 * 
- 
- 	 	 	 64:Word =32'b10101100000001100000000000000110; 	 // I n s t r u c t i o n   6 4 * 
- 
- 	 	 	 68:Word =32'b10101100000001110000000000000111; 	 // I n s t r u c t i o n   6 8 * 
- 
- 	 	 	 72:Word =32'b10101100000010000000000000001000; 	 // I n s t r u c t i o n   7 2 * 
- 
- 	 	 	 76:Word =32'b10101100000010010000000000001001; 	 // I n s t r u c t i o n   7 6 * 
- 
- 	 	 	 80:Word =32'b10101100000010100000000000001010; 	 // I n s t r u c t i o n   8 0 * 
- 
- 	 	 	 84:Word =32'b10101100000010110000000000001011; 	 // I n s t r u c t i o n   8 4 * 
- 
- 	 	 	 88:Word =32'b10101100000011000000000000001100; 	 // I n s t r u c t i o n   8 8 * 
- 
- 	 	 	 92:Word =32'b10101100000011010000000000001101; 	 // I n s t r u c t i o n   9 2 * 
- 
- 	 	 	 96:Word =32'b10101100000011100000000000001110; 	 // I n s t r u c t i o n   9 6 * 
- 
- 	 	 	 100:Word =32'b10101100000011110000000000001111;	 // I n s t r u c t i o n   1 0 0 * 
- 
- 	 	 	 104:Word =32'b10101100000100000000000000010000;  // I n s t r u c t i o n   1 0 4 * 
- 
- 	 	 	 108:Word =32'b10101100000100010000000000010001;	 // I n s t r u c t i o n   1 0 8 * 
- 
- 	 	 	 112:Word =32'b10101100000100100000000000010010;	 // I n s t r u c t i o n   1 1 2 * 
- 
- 	 	 	 116:Word =32'b10101100000100110000000000010011;	 // I n s t r u c t i o n   1 1 6 * 
- 
- 	 	 	 120:Word =32'b10101100000101000000000000010100;	 // I n s t r u c t i o n   1 2 0 * 
- 
- 	 	 	 124:Word =32'b10101100000101010000000000010101;	 // I n s t r u c t i o n   1 2 4 * 
- 
- 	 	 	 128:Word =32'b10101100000101100000000000010110;	 // I n s t r u c t i o n   1 2 8 * 
- 
- 	 	 	 132:Word =32'b10101100000101110000000000010111;	 // I n s t r u c t i o n   1 3 2 
- 
- 	 	 	 136:Word =32'b10101100000110000000000000011000;  // I n s t r u c t i o n   1 3 6 * 
- 
- 	 	 	 140:Word =32'b10101100000110010000000000011001;	 // I n s t r u c t i o n   1 4 0 * 
- 
- 	 	 	 144:Word =32'b10101100000110100000000000011010;	 // I n s t r u c t i o n   1 4 4 * 
- 
- 	 	 	 148:Word =32'b10101100000110110000000000011011;  // I n s t r u c t i o n   1 4 8 * 
- 
- 	 	 	 152:Word =32'b10101100000111000000000000011100;	 // I n s t r u c t i o n   1 5 2 * 
- 
- 	 	 	 156:Word =32'b10101100000111010000000000011101;	 // I n s t r u c t i o n   1 5 6 * 
- 
- 	 	 	 160:Word =32'b10101100000111100000000000011110;	 // I n s t r u c t i o n   1 6 0 * 
- 
- 	 	 	 164:Word =32'b10101100000111110000000000011111;	 // I n s t r u c t i o n   1 6 4 * 
- 
- 	 	 	 168:Word =32'b00100100000000000000000000000001;	 // I n s t r u c t i o n   1 6 8 * 
- 
- 	 	 	 172:Word =32'b10101100000000000000000100000000;	 // I n s t r u c t i o n   1 7 2 * 
- 
- 	 	 	 176:Word =32'b00001000000000000000000010110000;	 // I n s t r u c t i o n   1 7 6 * 
- 
- 	 	 	 default:Word=32'b1111111111111111111111111111111111; 
- 	 endcase   
- 
- end 
- 
- endmodule 
- 
- 
+
+endmodule
